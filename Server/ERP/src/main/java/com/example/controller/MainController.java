@@ -12,13 +12,14 @@ import com.example.service.MasterService;
 
 
 @CrossOrigin("*")
+@RequestMapping("/api/v1")
 @RestController
 public class MainController {
 
 	@Autowired
 	MasterService masterService;
 
-	@RequestMapping(value = "test", method = RequestMethod.GET)
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String testAPI() {
 		return "Server Running Sucessfully Keep Coding!!";
 	}
