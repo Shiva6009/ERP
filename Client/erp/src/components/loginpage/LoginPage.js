@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { StrictMode, useEffect, useState } from "react";
 import "./LoginPage.css";
 import loginImage from "../../images/loginImage.png";
-import axios from "axios";
 import { loginRequest } from "../../api/apirequest";
+import { checkRequest } from "../../api/apirequest";
+import { useSelector, useDispatch } from "react-redux";
+import { authenticationSliceAction } from "../../redux/authenticationstore";
 
 const LoginPage = () => {
+  const isAuthenticated = useSelector(
+    (state) => state.authticationSlice.isAuthenticated
+  );
+  const dispatch = useDispatch();
+
   const [enteredEmployeeId, setEnteredEmployeeId] = useState(null);
   const [enteredPassword, setEnteredPassword] = useState(null);
-
   const [errors, setErrors] = useState({
     employeeiderror: "",
     passworderror: "",
@@ -27,17 +33,22 @@ const LoginPage = () => {
       }));
     } else {
       event.preventDefault();
-      loginRequest(enteredEmployeeId , enteredPassword).then((response) =>
-      {
-        console.log(" Response " , response)
-        localStorage.setItem("key" , response.data.jwtToken)
-      })
+      loginRequest(enteredEmployeeId, enteredPassword)
+        .then((response) => {
+          console.log(" Response ", response);
+          localStorage.setItem("key", response.data.jwtToken);
+          dispatch(authenticationSliceAction.login());
+          console.log(" Value ", isAuthenticated);
+        })
+        .catch((err) => {
+          console.log(" Error ", err);
+        });
     }
   };
 
   useEffect(() => {
-     console.log(" Env Variable " , process.env.REACT_APP_BASE_URL)
-  }, [errors]);
+    console.log(" Env Variable ", isAuthenticated);
+  }, [isAuthenticated]);
 
   const onChangeForEmployeeIdHandler = (event) => {
     setEnteredEmployeeId(event.target.value);
@@ -45,6 +56,10 @@ const LoginPage = () => {
 
   const onChnageForPasswordHandler = (event) => {
     setEnteredPassword(event.target.value);
+  };
+
+  const checkFunction = () => {
+    checkRequest();
   };
 
   return (
@@ -74,6 +89,8 @@ const LoginPage = () => {
               <button onClick={loginButtonHandler} className="login-button">
                 Log In
               </button>
+
+              <button onClick={checkFunction}>Check </button>
               <a className="link-tag"> Forgot Password?</a>
             </div>
           </div>

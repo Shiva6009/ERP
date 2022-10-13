@@ -56,15 +56,14 @@ public class ErpApplication {
 //		
 //		userDetailsReposistory.save(user);
 //		
+//	}
+//
+//	private Authority createAuthority(String roleCode, String roleDescription) {
+//		Authority authority = new Authority();
+//		authority.setRoleCode(roleCode);
+//		authority.setRoleDescription(roleDescription);
+//		return authority;
 //
 //	}
-
-	private Authority createAuthority(String roleCode, String roleDescription) {
-		Authority authority = new Authority();
-		authority.setRoleCode(roleCode);
-		authority.setRoleDescription(roleDescription);
-		return authority;
-
-	}
 
 }
