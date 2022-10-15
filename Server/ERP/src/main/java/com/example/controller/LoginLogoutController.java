@@ -35,5 +35,11 @@ public class LoginLogoutController {
 	public boolean logout(@RequestBody LogoutRequest logoutRequest) {
 		return loginLogoutService.logout(logoutRequest);
 	}
-
+	
+	@RequestMapping(value = "/logoutconfirm" , method = RequestMethod.POST)
+	public boolean logoutConfirm(@RequestBody LogoutRequest logoutRequest) {
+		return loginLogoutService.logoutConfirmation(logoutRequest);
+	}
+	
+	
 }

@@ -11,7 +11,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -22,8 +24,10 @@ import com.example.model.User;
 @EnableJpaRepositories("com.example.dao")
 @EntityScan("com.example.model")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@ComponentScan(basePackages = { "com.example.service", "com.example.controller", "com.example.config" })
+@ComponentScan(basePackages = { "com.example.service", "com.example.controller", "com.example.config" , "com.example.scheduler"})
 @SpringBootApplication
+@EnableScheduling
+//@PropertySource("file:D:\\Spring\\application.properties")
 public class ErpApplication {
 
 	@Autowired

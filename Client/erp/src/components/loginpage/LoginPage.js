@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./LoginPage.css";
 import loginImage from "../../images/loginImage.png";
 import axios from "axios";
-import { loginRequest } from "../../api/apirequest";
+import { AuthenticationRequest } from "../../api/apirequest";
 import { useDispatch, useSelector } from "react-redux";
 import { authenticationSliceActions } from "../../redux/autheticationSlice";
 
@@ -40,7 +40,7 @@ const LoginPage = () => {
       event.preventDefault();
 
       // Calling Springboot API
-      loginRequest(enteredEmployeeId, enteredPassword)
+      AuthenticationRequest(enteredEmployeeId, enteredPassword)
         .then((response) => {
           console.log(" Response ", response);
           dispatch(authenticationSliceActions.login());

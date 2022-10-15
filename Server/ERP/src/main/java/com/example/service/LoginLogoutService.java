@@ -7,5 +7,7 @@ public interface LoginLogoutService {
 
 	public boolean login(LoginRequest loginrequest);
 	public boolean logout(LogoutRequest logoutRequest);
+	public boolean autoLogout();
+	public boolean logoutConfirmation(LogoutRequest logoutRequest);
 
 }
