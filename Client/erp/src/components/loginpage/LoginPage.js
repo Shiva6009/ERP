@@ -3,16 +3,27 @@ import "./LoginPage.css";
 import loginImage from "../../images/loginImage.png";
 import axios from "axios";
 import { loginRequest } from "../../api/apirequest";
+import { useDispatch, useSelector } from "react-redux";
+import { authenticationSliceActions } from "../../redux/autheticationSlice";
 
 const LoginPage = () => {
+
+
+  // Usage of Dispatch and Selector
+  const isAuthenticated = useSelector(
+    (state) => state.authSlice.isAuthenticated
+  );
+  const dispatch = useDispatch();
+
+  // Internal State
   const [enteredEmployeeId, setEnteredEmployeeId] = useState(null);
   const [enteredPassword, setEnteredPassword] = useState(null);
-
   const [errors, setErrors] = useState({
     employeeiderror: "",
     passworderror: "",
   });
 
+  // Handler Methods
   const loginButtonHandler = (event) => {
     setErrors(null);
     if (enteredEmployeeId == null) {
@@ -27,17 +38,22 @@ const LoginPage = () => {
       }));
     } else {
       event.preventDefault();
-      loginRequest(enteredEmployeeId , enteredPassword).then((response) =>
-      {
-        console.log(" Response " , response)
-        localStorage.setItem("key" , response.data.jwtToken)
-      })
+
+      // Calling Springboot API
+      loginRequest(enteredEmployeeId, enteredPassword)
+        .then((response) => {
+          console.log(" Response ", response);
+          dispatch(authenticationSliceActions.login());
+          localStorage.setItem("key", response.data.jwtToken);
+        })
+        .catch((error) => {
+          console.log(" Error ", error);
+        });
     }
   };
-
   useEffect(() => {
-     console.log(" Env Variable " , process.env.REACT_APP_BASE_URL)
-  }, [errors]);
+    console.log(" Env Variable ", isAuthenticated);
+  }, [isAuthenticated]);
 
   const onChangeForEmployeeIdHandler = (event) => {
     setEnteredEmployeeId(event.target.value);
