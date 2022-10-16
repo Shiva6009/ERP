@@ -7,8 +7,8 @@ import WrapperDashboard from "./components/dashboard/WrapperDashboard";
 function App() {
   // localStorage.clear()
   return (
-    <WrapperDashboard />
-    //<LoginPage />
+   // <WrapperDashboard />
+    <LoginPage />
   );
 }
 
