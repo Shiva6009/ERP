@@ -1,29 +1,31 @@
 package com.example.erp;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.example.dao.UserDetailsReposistory;
-import com.example.model.Authority;
-import com.example.model.User;
+
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableJpaRepositories("com.example.dao")
 @EntityScan("com.example.model")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@ComponentScan(basePackages = { "com.example.service", "com.example.controller", "com.example.config" })
+@ComponentScan(basePackages = { "com.example.service", "com.example.controller", "com.example.config" , "com.example.scheduler"})
 @SpringBootApplication
+@EnableScheduling
+@EnableSwagger2
+//@PropertySource("file:D:\\Spring\\application.properties")
 public class ErpApplication {
 
 	@Autowired
@@ -37,6 +39,12 @@ public class ErpApplication {
 		System.out.println("Server Running Successfully!!!");
 	}
 
+//Swagger Used for APIS	
+	 @Bean
+	   public Docket productApi() {
+	      return new Docket(DocumentationType.SWAGGER_2).select()
+	         .apis(RequestHandlerSelectors.basePackage("com.example.controller")).build();
+	   }
 //	@PostConstruct
 //	public void init() {
 //		List<Authority> authorityList = new ArrayList<>();
@@ -59,12 +67,12 @@ public class ErpApplication {
 //
 //	}
 
-	private Authority createAuthority(String roleCode, String roleDescription) {
-		Authority authority = new Authority();
-		authority.setRoleCode(roleCode);
-		authority.setRoleDescription(roleDescription);
-		return authority;
-
-	}
+//	private Authority createAuthority(String roleCode, String roleDescription) {
+//		Authority authority = new Authority();
+//		authority.setRoleCode(roleCode);
+//		authority.setRoleDescription(roleDescription);
+//		return authority;
+//
+//	}
 
 }

@@ -1,15 +1,23 @@
 package com.example.response;
 
+import java.util.Date;
+
 public class LoginResponse {
 	
-	private String jwtToken;
-
-	public String getJwtToken() {
-		return jwtToken;
+	private int userId;
+	private Date loginTime;
+	
+	public int getUserId() {
+		return userId;
 	}
-
-	public void setJwtToken(String jwtToken) {
-		this.jwtToken = jwtToken;
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public Date getLoginTime() {
+		return loginTime;
+	}
+	public void setLoginTime(Date loginTime) {
+		this.loginTime = loginTime;
 	}
 	
 	

@@ -7,8 +7,6 @@ import com.example.model.User;
 
 
 @Repository
-public interface UserDetailsReposistory extends JpaRepository<User, Long>{
-
-	
+public interface UserDetailsReposistory extends JpaRepository<User, Long>{	
 	User findByuserName(String userName);
 }

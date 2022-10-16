@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.config.JWTTokenHelper;
 import com.example.model.User;
 import com.example.request.AuthericationRequest;
-import com.example.response.LoginResponse;
+import com.example.response.AuthenticationResponse;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -43,7 +43,7 @@ public class AuthenticationController {
 		final Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(logindetails.getUserName(), logindetails.getPassword()));
 		
-		
+
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -51,7 +51,7 @@ public class AuthenticationController {
 
 		String jwtToken = jwtTokenHelper.generateToken(user.getUsername());
 
-		LoginResponse response = new LoginResponse();
+		AuthenticationResponse response = new AuthenticationResponse();
 		response.setJwtToken(jwtToken);
 
 		return ResponseEntity.ok(response);

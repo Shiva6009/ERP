@@ -1,12 +1,7 @@
 .landing-page {
   width: 100%;
   height: 100vh;
-  background-image: linear-gradient(
-    to bottom,
-    rgb(223, 238, 229),
-    rgb(235, 210, 231),
-    rgb(251, 162, 243)
-  );
+  background-image: linear-gradient(to bottom, #a107ed, #f60f46, #f79e02);
   margin: 0;
   padding: 0;
   display: flex;
@@ -18,7 +13,7 @@
   height: auto;
   width: 60%;
   border-radius: 1%;
-  background-color: white;
+  background-image: linear-gradient(to right , #eedce5, #EED8EF, #E3D5F7);
   display: flex;
 }
 
